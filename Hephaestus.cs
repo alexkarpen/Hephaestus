@@ -26,7 +26,7 @@ public record ModMetadata : AbstractModMetadata
     public override string Name { get; init; } = "Hephaestus";
     public override string Author { get; init; } = "alexkarpen";
     public override List<string>? Contributors { get; init; } = ["alexkarpen"];
-    public override SemanticVersioning.Version Version { get; init; } = new("2.0.2");
+    public override SemanticVersioning.Version Version { get; init; } = new("2.0.3");
     public override SemanticVersioning.Range SptVersion { get; init; } = new("~4.0.3");
     
     
@@ -38,7 +38,7 @@ public record ModMetadata : AbstractModMetadata
 }
 
 // This line tells the class to load right after "PostDBModLoader" occurs
-[Injectable(TypePriority = OnLoadOrder.TraderRegistration - 2)]
+[Injectable(TypePriority = OnLoadOrder.PostDBModLoader + 1)]
 public class Hephaestus(
     ISptLogger<Hephaestus> logger,
     ModHelper modHelper,
@@ -94,27 +94,3 @@ public class Hephaestus(
 }
 
 
-//[Injectable(TypePriority = OnLoadOrder.PostSptModLoader + 1)]
-//public class HephaestusAfter(
-//    ISptLogger<Hephaestus> logger,
-//    ModHelper modHelper,
-//    DatabaseService databaseService,
-//    ImageRouter imageRouter,
-//    ConfigServer configServer,
-//    TimeUtil timeUtil,
-//    ICloner cloner,
-//    FluentTraderAssortCreator fluentAssortCreator, // This is a custom class we add for this mod, we made it injectable so it can be accessed like other classes here
-//    AddCustomTraderHelper addCustomTraderHelper, // This is a custom class we add for this mod, we made it injectable so it can be accessed like other classes here
-//    GenerateAssort generateAssortHelper
-//    )
-//    : IOnLoad
-//{
-//    private readonly TraderConfig _traderConfig = configServer.GetConfig<TraderConfig>();
-//    private readonly RagfairConfig _ragfairConfig = configServer.GetConfig<RagfairConfig>();
-
-//    public Task OnLoad()
-//    {
-//        generateAssortHelper.buildAssort();
-//        return Task.CompletedTask;
-//    }
-//}
